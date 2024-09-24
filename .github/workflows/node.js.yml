@@ -34,15 +34,33 @@ jobs:
     - name: Run tests
       run: npm test
 
-    - name: Run Trivy vulnerability scanner in repo mode
+    # - name: Run Trivy vulnerability scanner in repo mode
+    #   uses: aquasecurity/trivy-action@0.20.0
+    #   with:
+    #     scan-type: 'fs'
+    #     ignore-unfixed: true
+    #     format: 'sarif'
+    #     output: 'trivy-results.sarif'
+    #     severity: 'CRITICAL'
+
+
+    - name: Trivy Secret Scan
       uses: aquasecurity/trivy-action@0.20.0
       with:
-        scan-type: 'fs'
+        scan-type: fs
         ignore-unfixed: true
-        format: 'sarif'
-        output: 'trivy-results.sarif'
-        severity: 'CRITICAL'
+        format: sarif
+        output: trivy-results.sarif
+        severity: CRITICAL
+        scan-ref: .
+        vuln-type: os,library
+        list-all-pkgs: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
+    - name: Upload SARIF Report to Code Scanning
+      uses: github/codeql-action/upload-sarif@v2
+      with:
+        sarif_file: trivy-results.sarif
 
  
