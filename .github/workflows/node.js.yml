@@ -1,30 +1,42 @@
-name: CI
+
+name:  CI
 
 on:
   push:
     branches:
-      - main  # Change this to the branch you want to trigger the workflow
+      - main
+      
   pull_request:
     branches:
-      - main  # Change this to the branch you want to trigger the workflow
+      - main
+     
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    # Step 1: Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v3
 
+    # Step 2: Set up Node.js environment
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16 # Ensure this matches your Node.js version
+
+    # Step 3: Install dependencies
     - name: Install dependencies
       run: npm install
 
-    - name: Run Tests
-      run: npm run test
+    # Step 4: Run tests
+    - name: Run tests
+      run: npm test
 
-    - name: Run coverage
-      run: npm run coverage
+    # Step 5: Run build
+    - name: Build project
+      run: npm run build
 
 
 
