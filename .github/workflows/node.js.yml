@@ -34,9 +34,15 @@ jobs:
     - name: Run tests
       run: npm test
 
-    # Step 5: Run build
-    - name: Build project
-      run: npm run build
+    - name: Trivy Secret Scan
+      uses: aquasecurity/trivy-action@v0.11.0
+      with:
+        scan-type: 'fs' # Scans the filesystem
+        ignore-unfixed: true
+        format: 'table'
+        severity: 'HIGH,CRITICAL'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
 
