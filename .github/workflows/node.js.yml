@@ -35,7 +35,7 @@ jobs:
       run: npm test
 
     - name: Trivy Secret Scan
-      uses: aquasecurity/trivy-action@v0.11.0
+      uses: aquasecurity/trivy-action@main
       with:
         scan-type: 'fs' # Scans the filesystem
         ignore-unfixed: true
