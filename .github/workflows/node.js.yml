@@ -34,15 +34,14 @@ jobs:
     - name: Run tests
       run: npm test
 
-    - name: Trivy Secret Scan
-      uses: aquasecurity/trivy-action@main
+    - name: Run Trivy vulnerability scanner in repo mode
+      uses: aquasecurity/trivy-action@0.20.0
       with:
-        scan-type: 'fs' # Scans the filesystem
+        scan-type: 'fs'
         ignore-unfixed: true
-        format: 'table'
-        severity: 'HIGH,CRITICAL'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        severity: 'CRITICAL'
 
 
 
