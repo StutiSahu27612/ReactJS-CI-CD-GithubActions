@@ -1,29 +1,29 @@
 name: CI
 
-# on:
-#   push:
-#     branches:
-#       - main  # Change this to the branch you want to trigger the workflow
-#   pull_request:
-#     branches:
-#       - main  # Change this to the branch you want to trigger the workflow
-
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-
-
-  
 on:
-  push: 
-    branches: [ "main" ]
+  push:
+    branches:
+      - main  # Change this to the branch you want to trigger the workflow
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main  # Change this to the branch you want to trigger the workflow
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+
+
+  
+# on:
+#   push: 
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
+
+# jobs:
+#   build:
+
+#     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
