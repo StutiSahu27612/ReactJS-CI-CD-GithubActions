@@ -1,16 +1,16 @@
 name: CI
 
 on:
-  push:
-    branches:
-      - main  # Change this to the branch you want to trigger the workflow
+  push: 
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main  # Change this to the branch you want to trigger the workflow
+    branches: [ "main" ]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
 
 
 
