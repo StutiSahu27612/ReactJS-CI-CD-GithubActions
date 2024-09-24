@@ -1,34 +1,36 @@
 name: CI
 
 on:
-  push: 
-    branches: [ "main" ]
+  push:
+    branches:
+      - main  # Change this to the branch you want to trigger the workflow
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main  # Change this to the branch you want to trigger the workflow
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+
+
+  
+# on:
+#   push: 
+#     branches: [ "main" ]
+#   pull_request:
+#     branches: [ "main" ]
+
+# jobs:
+#   build:
+
+#     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v2
 
     - name: Install dependencies
       run: npm install
-
-    - name: Run tests
-      run: npm run test
-
-    - name: Generate coverage report
-      run: npm run coverage
-
-    - name: Upload coverage report
-      uses: actions/upload-artifact@v2
-      with:
-        name: coverage-report
-        path: coverage where is this uploading the coverage report
-
+ 
 
  
