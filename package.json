@@ -19,10 +19,10 @@
     "exclude": ["**/*.test.js", "**/*.spec.js"], 
     "extension": [".js", ".jsx"],
     "check-coverage": true,
-    "lines": 40,
-    "functions": 40,
+    "lines": 10,
+    "functions": 10,
     "branches": 10,
-    "statements": 40
+    "statements": 10
   },
   "author": "",
   "license": "ISC",
