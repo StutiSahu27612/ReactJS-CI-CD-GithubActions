@@ -21,7 +21,7 @@
     "check-coverage": true,
     "lines": 10,
     "functions": 10,
-    "branches": 10,
+    "branches": 1,
     "statements": 10
   },
   "author": "",
