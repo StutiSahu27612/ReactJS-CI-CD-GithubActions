@@ -10,22 +10,19 @@
     "prod": "webpack --config webpack.config.prod.js && cp index.html dist && cp manifest.json dist && cp logo.svg dist && cp favicon.ico dist && cp -R style dist",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
-    "coverage": "nyc --reporter=html --reporter=text npm run test"
+    "coverage": "nyc npm run test"
   },
   "nyc": {
-    "reporter": [
-      "text",
-      "html"
-    ],
+    "reporter": ["lcov", "text"], 
     "report-dir": "./coverage",
-    "extension": [
-      ".js",
-      ".jsx"
-    ],
-    "exclude": [
-      "*.test.js",
-      "*.spec.js"
-    ]
+    "all": true,
+    "exclude": ["**/*.test.js", "**/*.spec.js"], 
+    "extension": [".js", ".jsx"],
+    "check-coverage": true,
+    "lines": 80,
+    "functions": 80,
+    "branches": 80,
+    "statements": 80
   },
   "author": "",
   "license": "ISC",
