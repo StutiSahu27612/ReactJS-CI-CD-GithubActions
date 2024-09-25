@@ -1,4 +1,5 @@
-{
+
+  {
   "name": "testing-with-webpack-and-chai-mocha",
   "version": "1.0.0",
   "description": "Great thanks to Stephen Grider's Redux Simple Starter Repo, and his Udemy Course 'Advanced React and Redux', which were the basis of this code",
@@ -8,7 +9,7 @@
     "start": "npm run dev",
     "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.config.dev.js",
     "prod": "webpack --config webpack.config.prod.js && cp index.html dist && cp manifest.json dist && cp logo.svg dist && cp favicon.ico dist && cp -R style dist",
-    "test": "mocha --require @babel/register --require ./test/test_helper.js --recursive ./test",
+    "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
     "coverage": "nyc npm run test"
   },
@@ -29,13 +30,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.x.x",
-    "@babel/register": "^7.x.x",
-    "babel-loader": "^8.x.x",
-    "@babel/preset-env": "^7.x.x",
-    "@babel/preset-react": "^7.x.x",
-    "@babel/plugin-proposal-class-properties": "^7.x.x",
-    "@babel/plugin-proposal-object-rest-spread": "^7.x.x",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4", 
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "chai": "^4.1.2",
     "chai-jquery": "^2.0.0",
     "jquery": "^3.3.1",
@@ -48,11 +46,11 @@
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
+    "babel-preset-stage-1": "^6.1.18",
     "lodash": "^4.17.12",
-    "react": "^16.x.x",
-    "react-dom": "^16.x.x",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
     "redux": "^4.0.0"
   }
-}
