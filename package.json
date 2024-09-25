@@ -22,15 +22,15 @@
       ".jsx"
     ],
     "exclude": [
-      "**/*.test.js",
-      "**/*.spec.js"
+      "/*.test.js",
+      "/*.spec.js"
     ]
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "babel-core": "7.23.2",
-    "babel-loader": "^7.1.4", 
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "chai": "^4.1.2",
@@ -53,4 +53,4 @@
     "react-router": "^4.3.1",
     "redux": "^4.0.0"
   }
-}
+} 
