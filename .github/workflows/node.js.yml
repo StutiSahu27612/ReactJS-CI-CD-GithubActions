@@ -29,12 +29,7 @@ jobs:
     # Step 3: Install dependencies
     - name: Install dependencies
       run: npm install
-
-    # Step 4: Run tests
-    - name: Run tests
-      run: npm test
-
-
+      
     - name: Run Trivy vulnerability scanner in repo mode
       uses: aquasecurity/trivy-action@0.20.0
       with:
@@ -43,6 +38,9 @@ jobs:
         format: table
     
         severity: 'CRITICAL'
+    # Step 4: Run tests
+    - name: Run tests
+      run: npm test
   
     - name: SonarQube
       uses: actions/checkout@v2
