@@ -34,8 +34,6 @@ jobs:
     - name: Run tests
       run: npm test
 
-    - name : Run Coverage
-      run: npm run coverage  
 
     - name: Run Trivy vulnerability scanner in repo mode
       uses: aquasecurity/trivy-action@0.20.0
@@ -51,7 +49,14 @@ jobs:
       with:
         fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
         
+    - name : Run Coverage
+      run: npm run coverage  
 
+    - name: Check working directory
+      run: pwd
+    - name: List all files
+      run: ls -la
+  
     - name: List coverage directory
       run: ls -R coverage/
         
