@@ -34,6 +34,9 @@ jobs:
     - name: Run tests
       run: npm test
 
+    - name : Run Coverage
+      run: npm run coverage  
+
     - name: Run Trivy vulnerability scanner in repo mode
       uses: aquasecurity/trivy-action@0.20.0
       with:
@@ -42,7 +45,7 @@ jobs:
         format: table
     
         severity: 'CRITICAL'
-
+  
 
 
     - name: SonarQube
