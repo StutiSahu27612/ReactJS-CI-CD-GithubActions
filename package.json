@@ -10,20 +10,21 @@
     "prod": "webpack --config webpack.config.prod.js && cp index.html dist && cp manifest.json dist && cp logo.svg dist && cp favicon.ico dist && cp -R style dist",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
-    "coverage": "nyc npm run test"
+    "coverage": "nyc --reporter=html --reporter=text npm run test"
   },
   "nyc": {
     "reporter": [
       "text",
       "html"
     ],
+    "report-dir": "./coverage",
     "extension": [
       ".js",
       ".jsx"
     ],
     "exclude": [
-      "/*.test.js",
-      "/*.spec.js"
+      "*.test.js",
+      "*.spec.js"
     ]
   },
   "author": "",
@@ -53,4 +54,4 @@
     "react-router": "^4.3.1",
     "redux": "^4.0.0"
   }
-} 
+}
