@@ -52,24 +52,25 @@ jobs:
         fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
         
 
-  
+    - name: List coverage directory
+      run: ls -R coverage/
         
-    - name : SonarQube scan   
-      uses: sonarsource/sonarqube-scan-action@master
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # - name : SonarQube scan   
+    #   uses: sonarsource/sonarqube-scan-action@master
+    #   env:
+    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
-      with:
-        args: >
-          -Dsonar.projectKey=Reactjs-app
-          -Dsonar.sources=.
-          -Dsonar.javascript.lcov.reportPaths=coverage/index.html
+    #   with:
+    #     args: >
+    #       -Dsonar.projectKey=Reactjs-app
+    #       -Dsonar.sources=.
+    #       -Dsonar.javascript.lcov.reportPaths=coverage/index.html
 
 
-    - name: Verify LCOV report
-      run: cat coverage/index.html
+    # - name: Verify LCOV report
+    #   run: cat coverage/index.html
       # If you wish to fail your job when the Quality Gate is red, uncomment the
       # following lines. This would typically be used to fail a deployment.
       # - uses: sonarsource/sonarqube-quality-gate-action@master
