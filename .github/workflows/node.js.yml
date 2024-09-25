@@ -24,7 +24,14 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 16 # Ensure this matches your Node.js version
-
+    - name: Run Trivy vulnerability scanner in repo mode
+      uses: aquasecurity/trivy-action@0.20.0
+      with:
+        scan-type: 'fs'
+        ignore-unfixed: true
+        format: table
+    
+        severity: 'CRITICAL'
     # Step 3: Install dependencies
     - name: Install dependencies
       run: npm install
@@ -36,15 +43,16 @@ jobs:
     - name : Run Coverage
       run: npm run coverage  
 
-    - name: Run Trivy vulnerability scanner in repo mode
-      uses: aquasecurity/trivy-action@0.20.0
-      with:
-        scan-type: 'fs'
-        ignore-unfixed: true
-        format: table
-    
-        severity: 'CRITICAL'
-  
+
+
+    - name: Run tests and generate coverage
+      run: npm run coverage
+
+    - name: List project directory
+      run: ls -R .  # Lists all files and folders in the current directory
+
+    - name: List coverage directory
+      run: ls -R coverage/ || echo "Coverage directory does not exist."
     - name: SonarQube
       uses: actions/checkout@v2
       with:
