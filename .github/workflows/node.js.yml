@@ -45,22 +45,12 @@ jobs:
 
 
 
-    - name: Run tests and generate coverage
-      run: npm run coverage
-
-    - name: List project directory
-      run: ls -R .  # Lists all files and folders in the current directory
-
-    - name: List coverage directory
-      run: ls -R coverage/ || echo "Coverage directory does not exist."
-    - name: SonarQube
-      uses: actions/checkout@v2
+    - name: Upload coverage to Coveralls
+      uses: coverallsapp/github-action@v1
       with:
-        fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+        path-to-lcov: ./coverage/lcov.info 
         
 
-  
-        
     - name : SonarQube scan   
       uses: sonarsource/sonarqube-scan-action@master
       env:
@@ -73,6 +63,5 @@ jobs:
           -Dsonar.projectKey=Reactjs-app
           -Dsonar.sources=.
           -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-    - name: Verify LCOV report
-      run: cat coverage/lcov.info
+
  
