@@ -1,5 +1,4 @@
-
-  {
+{
   "name": "testing-with-webpack-and-chai-mocha",
   "version": "1.0.0",
   "description": "Great thanks to Stephen Grider's Redux Simple Starter Repo, and his Udemy Course 'Advanced React and Redux', which were the basis of this code",
@@ -14,24 +13,23 @@
     "coverage": "nyc npm run test"
   },
   "nyc": {
-    "reporter": [
-      "text",
-      "html"
-    ],
-    "extension": [
-      ".js",
-      ".jsx"
-    ],
-    "exclude": [
-      "**/*.test.js",
-      "**/*.spec.js"
-    ]
+    "reporter": ["lcov", "text"], 
+    "report-dir": "./coverage",
+    "all": true,
+    "include": ["src/**/*.js"],
+    "exclude": ["**/*.test.js", "**/*.spec.js"], 
+    "extension": [".js", ".jsx"],
+    "check-coverage": true,
+    "lines": 80,
+    "functions": 80,
+    "branches": 80,
+    "statements": 80
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.4", 
+    "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "chai": "^4.1.2",
