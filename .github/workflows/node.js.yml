@@ -35,10 +35,7 @@ jobs:
 
     - name : Run Coverage
       run: npm run coverage  
-    - name: Check working directory
-      run: pwd
-    - name: List all files
-      run: ls -la
+
     - name: Run Trivy vulnerability scanner in repo mode
       uses: aquasecurity/trivy-action@0.20.0
       with:
