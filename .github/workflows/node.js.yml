@@ -37,7 +37,8 @@ jobs:
     
     #     severity: 'CRITICAL'
 
-
+    - name: Install dependencies
+      run: npm install
 
     # Step 4: Run tests
     - name: Run tests
