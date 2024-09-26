@@ -1,61 +1,129 @@
-name:  CI
+# name:  CI
 
-# on:
-#   push:
-#     branches:
-#       - main
+# # on:
+# #   push:
+# #     branches:
+# #       - main
       
-#   pull_request:
-#     branches:
-#       - main
+# #   pull_request:
+# #     branches:
+# #       - main
+# on:
+#   workflow_dispatch:
+     
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-20.04
+
+#     steps:
+#     # Step 1: Checkout the code
+#     - name: Checkout code
+#       uses: actions/checkout@v3
+
+#     # Step 2: Set up Node.js environment
+#     - name: Set up Node.js
+#       uses: actions/setup-node@v3
+#       with:
+#         node-version: 16 # Ensure this matches your Node.js version
+
+        
+#     # - name: Run Trivy vulnerability scanner in repo mode
+#     #   uses: aquasecurity/trivy-action@0.20.0
+#     #   with:
+#     #     scan-type: 'fs'
+#     #     ignore-unfixed: true
+#     #     format: table
+    
+#     #     severity: 'CRITICAL'
+
+
+#     - name: Run Trivy
+#       run: |
+#     # Optional: Download the Trivy database first
+#                 trivy --download-db-only
+
+#     # Run the Trivy scan
+#         trivy fs --format table --ignore-unfixed --vuln-type os,library --severity CRITICAL .
+#     # Step 3: Install dependencies
+#     - name: Install dependencies
+#       run: npm install
+
+#     # Step 4: Run tests
+#     - name: Run tests
+#       run: npm test
+
+#     - name : Run Coverage
+#       run: npm run coverage  
+        
+
+#     - name : SonarQube scan   
+#       uses: sonarsource/sonarqube-scan-action@master
+#       env:
+#         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+#     - name: Build Docker image
+#       run: |
+#        docker build -t reactjs-app-image .
+
+
+ name: CI
+
 on:
   workflow_dispatch:
-     
+  # Uncomment the following lines to trigger on push or pull requests to the main branch
+  # push:
+  #   branches:
+  #     - main
+  # pull_request:
+  #   branches:
+  #     - main
 
 jobs:
   build:
     runs-on: ubuntu-20.04
 
     steps:
-    # Step 1: Checkout the code
-    - name: Checkout code
-      uses: actions/checkout@v3
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    # Step 2: Set up Node.js environment
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16 # Ensure this matches your Node.js version
-    - name: Run Trivy vulnerability scanner in repo mode
-      uses: aquasecurity/trivy-action@0.20.0
-      with:
-        scan-type: 'fs'
-        ignore-unfixed: true
-        format: table
-    
-        severity: 'CRITICAL'
-        
-    # Step 3: Install dependencies
-    - name: Install dependencies
-      run: npm install
+      # Step 2: Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16 # Ensure this matches your Node.js version
 
-    # Step 4: Run tests
-    - name: Run tests
-      run: npm test
+      # Step 3: Download the Trivy database (optional)
+      - name: Download Trivy Database
+        run: trivy --download-db-only
 
-    - name : Run Coverage
-      run: npm run coverage  
-        
+      # Step 4: Run Trivy vulnerability scanner
+      - name: Run Trivy
+        run: |
+          trivy fs --format table --ignore-unfixed --vuln-type os,library --severity CRITICAL .
 
-    - name : SonarQube scan   
-      uses: sonarsource/sonarqube-scan-action@master
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      # Step 5: Install dependencies
+      - name: Install dependencies
+        run: npm install
 
-    - name: Build Docker image
-      run: |
-       docker build -t reactjs-app-image .
+      # Step 6: Run tests
+      - name: Run tests
+        run: npm test
 
+      # Step 7: Run Coverage
+      - name: Run Coverage
+        run: npm run coverage  
 
- 
+      # Step 8: SonarQube scan   
+      - name: SonarQube scan   
+        uses: sonarsource/sonarqube-scan-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+
+      # Step 9: Build Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t reactjs-app-image .
