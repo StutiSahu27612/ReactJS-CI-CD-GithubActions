@@ -58,9 +58,6 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
-    - name: Build Docker image
-      run: |
-       docker build -t reactjs-app-image .
 
     - name: Authenticate with Google Cloud
       id: auth
@@ -69,6 +66,21 @@ jobs:
        workload_identity_provider: '${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}'
        service_account: '${{ secrets.SERVICE_ACCOUNT_EMAIL }}'
 
+    - name: Configure Docker for GCR
+      run: |
+          echo "Configuring Docker for GCR"
+          gcloud auth configure-docker us-central1-docker.pkg.dev
+
+    - name: Build Docker image
+      run: |
+          docker build -t us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:${{ github.sha }} .
+
+      # Step 5: Push the Docker image to GCR
+    - name: Push Docker image to GCR
+      run: |
+          docker push us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:${{ github.sha }}
+
+      
 
 
 
