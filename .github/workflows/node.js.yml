@@ -32,9 +32,10 @@ jobs:
         format: table
     
         severity: 'CRITICAL'
-    # # Step 3: Install dependencies
-    # - name: Install dependencies
-    #   run: npm install
+        
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: npm install
 
     # Step 4: Run tests
     - name: Run tests
