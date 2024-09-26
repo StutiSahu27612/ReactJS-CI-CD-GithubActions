@@ -69,7 +69,7 @@ jobs:
       uses: google-github-actions/setup-gcloud@v1
       with:
           project_id: refined-helix-428205-q4  # Replace with your project ID
-          install_components: "docker"
+          export_default_credentials: true
 
       # Step 3: Authenticate Docker to use Google Artifact Registry
     - name: Configure Docker for GCR
