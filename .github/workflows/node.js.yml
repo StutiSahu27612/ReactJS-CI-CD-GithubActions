@@ -32,9 +32,9 @@ jobs:
         format: table
     
         severity: 'CRITICAL'
-    # Step 3: Install dependencies
-    - name: Install dependencies
-      run: npm install
+    # # Step 3: Install dependencies
+    # - name: Install dependencies
+    #   run: npm install
 
     # Step 4: Run tests
     - name: Run tests
@@ -45,10 +45,10 @@ jobs:
 
 
 
-    - name: Upload coverage to Coveralls
-      uses: coverallsapp/github-action@v1
-      with:
-        path-to-lcov: ./coverage/lcov.info 
+    # - name: Upload coverage to Coveralls
+    #   uses: coverallsapp/github-action@v1
+    #   with:
+    #     path-to-lcov: ./coverage/lcov.info 
         
 
     - name : SonarQube scan   
@@ -58,10 +58,10 @@ jobs:
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
-      with:
-        args: >
-          -Dsonar.projectKey=Reactjs-app
-          -Dsonar.sources=.
-          -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+      # with:
+      #   args: >
+      #     -Dsonar.projectKey=Reactjs-app
+      #     -Dsonar.sources=.
+      #     -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
 
  
