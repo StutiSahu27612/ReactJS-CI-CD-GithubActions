@@ -1,20 +1,20 @@
-# name:  CI
+name:  CI
 
-# # on:
-# #   push:
-# #     branches:
-# #       - main
-      
-# #   pull_request:
-# #     branches:
-# #       - main
 # on:
-#   workflow_dispatch:
+#   push:
+#     branches:
+#       - main
+      
+#   pull_request:
+#     branches:
+#       - main
+on:
+  workflow_dispatch:
      
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-20.04
+jobs:
+  build:
+    runs-on: ubuntu-20.04
 
 #     steps:
 #     # Step 1: Checkout the code
@@ -68,21 +68,7 @@
 #        docker build -t reactjs-app-image .
 
 
- name: CI
 
-on:
-  workflow_dispatch:
-  # Uncomment the following lines to trigger on push or pull requests to the main branch
-  # push:
-  #   branches:
-  #     - main
-  # pull_request:
-  #   branches:
-  #     - main
-
-jobs:
-  build:
-    runs-on: ubuntu-20.04
 
     steps:
       # Step 1: Checkout the code
