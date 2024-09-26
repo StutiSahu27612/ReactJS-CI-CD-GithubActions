@@ -60,25 +60,18 @@ jobs:
 
 
     - name: Authenticate with Google Cloud
-      id: auth
       uses: google-github-actions/auth@v2.0.0  
       with:
-       workload_identity_provider: '${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}'
-       service_account: '${{ secrets.SERVICE_ACCOUNT_EMAIL }}'
-
-    - name: Configure Docker for GCR
-      run: |
-          echo "Configuring Docker for GCR"
-          gcloud auth configure-docker us-central1-docker.pkg.dev
+          workload_identity_provider: '${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}'
+          service_account: '${{ secrets.SERVICE_ACCOUNT_EMAIL }}'
 
     - name: Build Docker image
       run: |
-          docker build -t us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:${{ github.sha }} .
+          docker build -t us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:latest .
 
-      # Step 5: Push the Docker image to GCR
-    - name: Push Docker image to GCR
+    - name: Push Docker image
       run: |
-          docker push us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:${{ github.sha }}
+          docker push us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:latest
 
       
 
