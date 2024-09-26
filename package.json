@@ -6,6 +6,7 @@
   "repository": "git@github.com:herrkraatz/react-testing.git",
   "scripts": {
     "start": "npm run dev",
+    "build": "webpack --config webpack.config.prod.js",
     "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.config.dev.js",
     "prod": "webpack --config webpack.config.prod.js && cp index.html dist && cp manifest.json dist && cp logo.svg dist && cp favicon.ico dist && cp -R style dist",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
@@ -13,16 +14,28 @@
     "coverage": "nyc npm run test"
   },
   "nyc": {
-    "reporter": ["lcov", "text"], 
+    "reporter": [
+      "lcov",
+      "text"
+    ],
     "report-dir": "./coverage",
     "all": true,
-    "exclude": ["**/*.test.js", "**/*.spec.js"], 
-    "extension": [".js", ".jsx"],
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "**/*.test.js",
+      "**/*.spec.js"
+    ],
+    "extension": [
+      ".js",
+      ".jsx"
+    ],
     "check-coverage": true,
-    "lines": 10,
-    "functions": 10,
-    "branches": 1,
-    "statements": 10
+    "lines": 80,
+    "functions": 80,
+    "branches": 80,
+    "statements": 80
   },
   "author": "",
   "license": "ISC",
@@ -33,6 +46,7 @@
     "babel-preset-react": "^6.24.1",
     "chai": "^4.1.2",
     "chai-jquery": "^2.0.0",
+    "html-webpack-plugin": "^4.5.2",
     "jquery": "^3.3.1",
     "jsdom": "^11.11.0",
     "mocha": "^5.2.0",
