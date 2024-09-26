@@ -58,6 +58,14 @@ jobs:
       run: |
        docker build -t reactjs-app-image .
 
+    - name: Authenticate with Google Cloud
+      id: auth
+      uses: google-github-actions/auth@v2.0.0  
+      with:
+       workload_identity_provider: '${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}'
+       service_account: '${{ secrets.SERVICE_ACCOUNT_EMAIL }}'
+
+
 
 
 
