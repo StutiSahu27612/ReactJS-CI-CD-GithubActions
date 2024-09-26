@@ -81,11 +81,17 @@ jobs:
         with:
           node-version: 16 # Ensure this matches your Node.js version
 
-      # Step 3: Download the Trivy database (optional)
+      - name: Install Trivy
+        run: |
+          sudo apt-get update && sudo apt-get install -y wget
+          wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.30.0_Linux-64bit.deb
+          sudo dpkg -i trivy_0.30.0_Linux-64bit.deb
+
+      # Step 4: Download the Trivy database (optional)
       - name: Download Trivy Database
         run: trivy --download-db-only
 
-      # Step 4: Run Trivy vulnerability scanner
+      # Step 5: Run Trivy vulnerability scanner
       - name: Run Trivy
         run: |
           trivy fs --format table --ignore-unfixed --vuln-type os,library --severity CRITICAL .
