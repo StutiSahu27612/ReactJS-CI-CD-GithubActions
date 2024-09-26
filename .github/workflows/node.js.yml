@@ -1,18 +1,20 @@
 name:  CI
 
-on:
-  push:
-    branches:
-      - main
+# on:
+#   push:
+#     branches:
+#       - main
       
-  pull_request:
-    branches:
-      - main
+#   pull_request:
+#     branches:
+#       - main
+on:
+  workflow_dispatch:
      
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     # Step 1: Checkout the code
