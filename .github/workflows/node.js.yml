@@ -85,16 +85,26 @@ jobs:
           gcloud auth configure-docker us-central1-docker.pkg.dev
           docker push us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:latest
       
-    - name: Deploy
-      run: |-
-          gcloud run deploy react-js-app \
-          --region us-central1 \
-          --image us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:latest
-          --platform "managed" \
-          --service-account $SERVICE_ACCOUNT_EMAIL \
-          --port 80 \
-          --quiet
+    # - name: Deploy
+    #   run: |-
+    #       gcloud run deploy react-js-app \
+    #       --region us-central1 \
+    #       --image us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:latest
+    #       --platform "managed" \
+    #       --service-account $SERVICE_ACCOUNT_EMAIL \
+    #       --port 80 \
+    #       --quiet
 
 
+    - name: Deploy to Cloud Run
+      id: deploy
+      uses: google-github-actions/deploy-cloudrun@v0
+      with:
+       service: service-react
+       region:  us-central1
+          # NOTE: If using a pre-built image, update the image name here
+       image: us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:latest
+       env_vars: "PORT=80"
+       allow_unauthenticated: true 
 
 
