@@ -69,7 +69,7 @@ jobs:
     # - name: Configure Docker for GCR
     #   run: |
     #       gcloud auth configure-docker us-central1-docker.pkg.dev
-
+ 
     # Step 3: Build Docker image
     - name: Build Docker image
       run: |
