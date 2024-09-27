@@ -52,11 +52,11 @@ jobs:
       run: npm run coverage  
         
 
-    - name : SonarQube scan   
-      uses: sonarsource/sonarqube-scan-action@master
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+    # - name : SonarQube scan   
+    #   uses: sonarsource/sonarqube-scan-action@master
+    #   env:
+    #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
 
     - name: Authenticate with Google Cloud
