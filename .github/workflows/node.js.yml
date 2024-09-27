@@ -58,8 +58,6 @@ jobs:
     #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     #     SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
-    - name: Check Active Service Account
-      run: gcloud config get-value account
 
     - name: Authenticate with Google Cloud
       uses: google-github-actions/auth@v2.0.0  
@@ -68,12 +66,13 @@ jobs:
           service_account: ${{ secrets.SERVICE_ACCOUNT_EMAIL }}
           
     - name: Check Active Service Account
-      run: gcloud config get-value account
+      run:  | 
+        gcloud config get-value account
 
-    # # Step 2: Authenticate Docker to use Google Artifact Registry
-    # - name: Configure Docker for GCR
-    #   run: |
-    #       gcloud auth configure-docker us-central1-docker.pkg.dev
+    # Step 2: Authenticate Docker to use Google Artifact Registry
+    - name: Configure Docker for GCR
+      run: |
+          gcloud auth configure-docker us-central1-docker.pkg.dev
  
     # Step 3: Build Docker image
     - name: Build Docker image
