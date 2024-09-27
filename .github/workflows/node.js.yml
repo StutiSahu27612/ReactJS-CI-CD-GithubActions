@@ -104,7 +104,6 @@ jobs:
        region:  us-central1
           # NOTE: If using a pre-built image, update the image name here
        image: us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:latest
-       env_vars: "PORT=80"
-       allow_unauthenticated: true 
+  
 
 
