@@ -65,14 +65,11 @@ jobs:
           workload_identity_provider: '${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}'
           service_account: '${{ secrets.SERVICE_ACCOUNT_EMAIL }}'
 
-    - name: Set up Cloud SDK
-      run: gcloud auth configure-docker \
-           us-central1-docker.pkg.dev
+    # - name: Set up Cloud SDK
+    #   run: gcloud auth configure-docker \
+    #        us-central1-docker.pkg.dev
            
       # Step 3: Authenticate Docker to use Google Artifact Registry
-    - name: Configure Docker for GCR
-      run: |
-          gcloud auth configure-docker us-central1-docker.pkg.dev
 
     - name: Build Docker image
       run: |
@@ -80,6 +77,7 @@ jobs:
 
     - name: Push Docker image
       run: |
+          gcloud auth configure-docker us-central1-docker.pkg.dev
           docker push us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:latest
 
       
