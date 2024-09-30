@@ -92,8 +92,8 @@ jobs:
     - name: Deploy to Cloud Run
       uses: google-github-actions/deploy-cloudrun@v2
       with:
-        service: githubaction-cicd-service-reactjs-nginx
+        service: ga-cicd-service-reactjs
         region: us-central1
         image: us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:${{ github.sha }}
-        flags: "--allow-unauthenticated"
+        flags: "--allow-unauthenticated --port=80"
   
