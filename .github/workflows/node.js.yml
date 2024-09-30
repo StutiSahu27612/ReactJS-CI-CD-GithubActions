@@ -87,6 +87,7 @@ jobs:
       with:
         image-ref: 'us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:${{ github.sha }}'
         format: 'table'
+        severity: 'CRITICAL'
         
         
     # Step 4: Push Docker image
