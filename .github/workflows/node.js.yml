@@ -85,15 +85,15 @@ jobs:
           gcloud auth configure-docker us-central1-docker.pkg.dev
           docker push us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:latest
       
-    - name: Deploy to Cloud Run
-      run: |
-        gcloud run deploy my-service \
-          --image us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:latest \
-          --platform managed \
-          --region us-central1 \
-          --allow-unauthenticated \
-          --set-env-vars PORT=80 \
-          --port=80
+    # - name: Deploy to Cloud Run
+    #   run: |
+    #     gcloud run deploy my-service \
+    #       --image us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:latest \
+    #       --platform managed \
+    #       --region us-central1 \
+    #       --allow-unauthenticated \
+    #       --set-env-vars PORT=80 \
+    #       --port=80
 
 
     # - name: Deploy to Cloud Run
@@ -106,4 +106,13 @@ jobs:
     #    image: us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:latest
   
 
+    - name: Deploy to Cloud Run
+      uses: google-github-actions/deploy-cloudrun@v2
+      with:
+        service: githubaction-cicd-service
+        region: us-central1
+        image: us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:latest
+        env_vars: |
+
+          flags: "--allow-unauthenticated"
 
