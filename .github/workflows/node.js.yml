@@ -77,13 +77,13 @@ jobs:
     # Step 3: Build Docker image
     - name: Build Docker image
       run: |
-          docker build -t us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:latest .
+          docker build -t us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:${{github-SHA}} .
 
     # Step 4: Push Docker image
     - name: Push Docker image
       run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev
-          docker push us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:latest
+          docker push us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:${{github-SHA}}
       
     # - name: Deploy to Cloud Run
     #   run: |
@@ -109,10 +109,8 @@ jobs:
     - name: Deploy to Cloud Run
       uses: google-github-actions/deploy-cloudrun@v2
       with:
-        service: githubaction-cicd-service
+        service: githubaction-cicd-service-reactjs
         region: us-central1
-        image: us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:latest
-        env_vars: |
-
-          flags: "--allow-unauthenticated"
+        image: us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:${{github-SHA}}
+        flags: "--allow-unauthenticated"
 
