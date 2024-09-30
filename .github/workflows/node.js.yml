@@ -82,6 +82,13 @@ jobs:
       run: |
           docker build -t us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:${{ github.sha }} .
 
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@0.20.0
+      with:
+        image-ref: 'us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:${{ github.sha }}'
+        format: 'table'
+        
+        
     # Step 4: Push Docker image
     - name: Push Docker image
       run: |
