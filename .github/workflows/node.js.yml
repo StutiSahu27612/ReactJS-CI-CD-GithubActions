@@ -87,13 +87,23 @@ jobs:
       run: |
           gcloud auth configure-docker us-central1-docker.pkg.dev
           docker push us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:${{ github.sha }}
-  
 
-    - name: Deploy to Cloud Run
-      uses: google-github-actions/deploy-cloudrun@v2
+    - id: 'deploy'
+      uses: 'google-github-actions/deploy-appengine@v2'
       with:
-        service: ga-cicd-service-reactjs
-        region: us-central1
-        image: us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:${{ github.sha }}
-        flags: "--allow-unauthenticated --port=80"
+        image_url: 'us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:${{ github.sha }}'
+        project_id: 'refined-helix-428205'
+
+    # Step 10: Test deployment by making a request to the deployed URL
+    - name: Test deployment
+      run: |
+        curl "${{ steps.deploy.outputs.version_url }}"
+        
+    # - name: Deploy to Cloud Run
+    #   uses: google-github-actions/deploy-cloudrun@v2
+    #   with:
+    #     service: ga-cicd-service-reactjs
+    #     region: us-central1
+    #     image: us-central1-docker.pkg.dev/refined-helix-428205-q4/reactjs-app-repo/reactjs-app-image:${{ github.sha }}
+    #     flags: "--allow-unauthenticated --port=80"
   
