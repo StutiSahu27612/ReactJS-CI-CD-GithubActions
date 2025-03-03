@@ -25,13 +25,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # - name: Run Trivy vulnerability scanner in repo mode
-    #   uses: aquasecurity/trivy-action@0.20.0
-    #   with:
-    #     scan-type: 'fs'
-    #     ignore-unfixed: true
-    #     format: table
-    #     severity: 'CRITICAL'
+    - name: Run Trivy vulnerability scanner in repo mode
+      uses: aquasecurity/trivy-action@0.20.0
+      with:
+        scan-type: 'fs'
+        ignore-unfixed: true
+        format: table
+        severity: 'CRITICAL'
         
     # Step 2: Set up Node.js environment
     - name: Set up Node.js
